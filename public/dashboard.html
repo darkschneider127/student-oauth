@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard • Student Gmail</title>
+    <style>
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; padding:30px; max-width:900px; margin:auto; line-height:1.5;}
+      .grid{display:grid; gap:16px;}
+      .card{border:1px solid #ddd; border-radius:14px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.06);}
+      .header{display:flex; justify-content:space-between; align-items:center;}
+      button{padding:10px 14px; border-radius:10px; border:1px solid #222; background:#fff; cursor:pointer; font-weight:600;}
+      table{width:100%; border-collapse: collapse;}
+      th,td{padding:8px 10px; border-bottom:1px solid #eee; text-align:left; font-size:14px;}
+      .muted{color:#555}
+      .id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;}
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="card header">
+        <div>
+          <h2>Student Dashboard (Gmail)</h2>
+          <p id="user" class="muted">Loading user…</p>
+        </div>
+        <form method="post" action="/logout">
+          <button>Logout</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Latest Emails</h3>
+        <table id="emails">
+          <thead><tr><th>Subject</th><th>From</th><th>Date</th><th>ID</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      async function json(url){const r=await fetch(url);if(!r.ok) throw new Error(await r.text());return r.json();}
+      function esc(s){return (s||"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));}
+      (async()=>{
+        try{
+          const me=await json("/api/me");
+          const userEl=document.getElementById("user");
+          if(me.authenticated){
+            const u=me.user||{};
+            userEl.textContent=u.email?`Signed in as ${u.email}`:"Signed in";
+            const data=await json("/api/emails");
+            const tbody=document.querySelector("#emails tbody");
+            tbody.innerHTML="";
+            for(const m of (data.messages||[])){
+              const tr=document.createElement("tr");
+              const h=m.headers||{};
+              tr.innerHTML=`<td>${esc(h.Subject)}</td><td>${esc(h.From)}</td><td>${esc(h.Date)}</td><td class="id">${esc(m.id)}</td>`;
+              tbody.appendChild(tr);
+            }
+          }else{ userEl.innerHTML='Not signed in. <a href="/login">Login</a>'; }
+        }catch(e){console.error(e);}
+      })();
+    </script>
+  </body>
+</html>
