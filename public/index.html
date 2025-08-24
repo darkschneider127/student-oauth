@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Into Student Dashboard</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif;}
+        body { background-color:#f4f7fa; display:flex; justify-content:center; align-items:center; height:100vh; position:relative; overflow:hidden;}
+        .bg-shape { position:absolute; border-radius:50%;}
+        .bg-shape-1 { width:400px;height:400px;background:linear-gradient(135deg,#7FFFD4,#00CED1);top:-100px;left:-100px;opacity:0.3;}
+        .bg-shape-2 { width:300px;height:300px;background:linear-gradient(135deg,#9370DB,#DDA0DD);bottom:-50px;left:100px;opacity:0.3;}
+        .bg-shape-3 { width:200px;height:200px;background:linear-gradient(135deg,#20B2AA,#87CEFA);top:100px;right:150px;opacity:0.3;}
+        .login-container { background:white; padding:40px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.1); width:350px; text-align:center; z-index:10;}
+        .logo { margin-bottom:20px;}
+        .logo img { width:80px; height:auto;}
+        .lock-icon { font-size:30px; color:#00CED1; margin-bottom:10px;}
+        h2 { margin-bottom:20px; color:#333; font-size:24px;}
+        .login-btn { width:100%; padding:12px; background:#007BFF; color:white; border:none; border-radius:5px; font-size:16px; cursor:pointer; transition:background 0.3s;}
+        .login-btn:hover { background:#0056b3;}
+        .forgot-password { margin-top:15px; font-size:13px; color:#666;}
+        .forgot-password a { color:#007BFF; text-decoration:none;}
+    </style>
+</head>
+<body>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://www.vvit.net/wp-content/uploads/2021/01/cropped-VVIT-Logo-1.png" alt="VVIT Logo">
+        </div>
+        <div class="lock-icon">🔒</div>
+        <h2>Login Into Student Dashboard</h2>
+        <a href="/login"><button type="button" class="login-btn">Login with Google</button></a>
+        <div class="forgot-password">
+            <a href="#">Forgot Your Password?</a>
+        </div>
+        <p style="font-size:12px;color:#999;margin-top:20px;">© 2025 - EducateNXT</p>
+    </div>
+</body>
+</html>
