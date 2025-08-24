@@ -1,0 +1,17 @@
+{
+  "name": "student-oauth-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "googleapis": "^140.0.1",
+    "morgan": "^1.10.0"
+  }
+}
